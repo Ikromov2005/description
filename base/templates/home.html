@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="shadow-wrap">
+ <div class="form-wrap">
+ {% csrf_token %}
+<head>
+    <title>Home</title>
+</head>
+<body>
+    {% if request.user.is_superuser %}
+    <h3 class="text-xl">Status: ⭐️⭐️⭐️ Superuser</h3>
+    {% else %}
+    <h3 class="text-xl">Status: ⭐️⭐️ User</h3>
+    {% endif %}
+    <h2>Salom {{ user.username }} 🤗</h2>
+    {% if transactions %}
+        <h3>Sizning kirim va chiqimlaringiz📊</h3>
+        <ul>
+            {% for transaction in transactions %}
+                <p>{{ transaction.description }}:<br>{{ transaction.amount }} so'm 💵</p>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>{{ message }}</p>
+    {% endif %}
+</body>
+</div>
+</div>
+{% endblock content %}
